@@ -6,6 +6,8 @@ import br.com.alurafood.pagamentos.model.Pagamento;
 import br.com.alurafood.pagamentos.model.Status;
 import br.com.alurafood.pagamentos.repository.PagamentoRepositoy;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,9 @@ public class PagamentoService {
 
     @Autowired
     private PedidoClient pedidoClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
 
     public Page<PagamentoDto> obterTodos(Pageable paginacao) {
@@ -69,7 +74,8 @@ public class PagamentoService {
 
         pagamento.get().setStatus(Status.CONFIRMADO);
         repository.save(pagamento.get());
-        pedidoClient.atualizarPagamento(pagamento.get().getPedidoId());
+        PagamentoDto pagamentoDto = new PagamentoDto(pagamento.get());
+        rabbitTemplate.convertAndSend("pagamento.concluido", pagamentoDto);
     }
 
 

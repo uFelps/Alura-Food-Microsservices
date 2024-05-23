@@ -56,7 +56,6 @@ public class PagamentoController {
     }
 
     @PatchMapping("/{id}/confirmar")
-    @CircuitBreaker(name = "atualizaPedido", fallbackMethod = "pagamentoAutorizadoComIntegracaoPendente")
     public void confirmarPagamento(@PathVariable @NotNull Long id){
         service.confirmarPagamento(id);
     }
