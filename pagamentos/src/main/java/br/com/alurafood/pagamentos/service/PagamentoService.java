@@ -75,7 +75,7 @@ public class PagamentoService {
         pagamento.get().setStatus(Status.CONFIRMADO);
         repository.save(pagamento.get());
         PagamentoDto pagamentoDto = new PagamentoDto(pagamento.get());
-        rabbitTemplate.convertAndSend("pagamento.concluido", pagamentoDto);
+        rabbitTemplate.convertAndSend("pagamentos.ex", "", pagamentoDto);
     }
 
 
