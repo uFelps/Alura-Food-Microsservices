@@ -82,7 +82,7 @@ Confirme o pagamento mandando uma Request PATCH na URL: `http://localhost:8085/p
 
 Após essa request, o irá enviar mensagens assíncronas para os microsserviços de pedidos e avaliação, informando que o pagamento foi confirmado
 
-<img src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fc0a2d5f3-6cf2-4884-a289-1e7201bb617f%2Fb7995177-5777-4e07-af8a-a54d37d8489e%2FUntitled.png?table=block&id=58dc19de-9b07-4048-ae01-8c00c4d190ac&spaceId=c0a2d5f3-6cf2-4884-a289-1e7201bb617f&width=2000&userId=97b328ad-7e61-4c34-b7f9-79fba90d0c5d&cache=v2" alt="Representação comunicação Assincrona">
+<img src="https://github.com/uFelps/assets/blob/main/Alura-Food/comunicacaoAssincrona.png?raw=true" alt="Representação comunicação Assincrona">
 
 Se você buscar todos os pagamentos novamente, o pagamento agora estará com o status CONFIRMADO.
 
