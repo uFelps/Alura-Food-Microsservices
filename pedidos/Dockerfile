@@ -1,5 +1,10 @@
+FROM maven:3.8.4-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
 FROM openjdk:17-jdk
-
-COPY target/pedidos-ms-0.0.1-SNAPSHOT.jar /app/pedidos-ms.jar
-
+WORKDIR /app
+COPY --from=build app/target/pedidos-ms-0.0.1-SNAPSHOT.jar /app/pedidos-ms.jar
 CMD ["java", "-jar", "/app/pedidos-ms.jar"]
